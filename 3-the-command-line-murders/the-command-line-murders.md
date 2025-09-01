@@ -1,5 +1,8 @@
 Briefly:
 
+- `find <where> -name "<Name of file>" -o -name "<Name of file2>"`
+- `grep -oP "<regex>" <file> | grep -A 5 -B 2`
+- `{files[@]` for () in bash
 ---
 
 # Task
