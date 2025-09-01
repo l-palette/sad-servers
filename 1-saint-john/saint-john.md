@@ -83,4 +83,4 @@ admin@ip-10-1-13-22:~$ ls -lh /var/log/bad.log
 -rw-r--r-- 1 admin admin 48K Aug 28 14:48 /var/log/bad.log
 ```
 
-![img.png](../images/img.png)
+![img.png](img.png)

@@ -1,5 +1,9 @@
 Briefly:
-
+- `sort`: Sorts the extracted IP addresses.
+- `uniq -c`: Counts how many times each unique IP address appears.
+- `sort -nr`: Sorts the counts in descending order. 
+- `head -n 1`: Retrieves the IP address with the highest count.
+- `awk '{print $2}'`: Extracts just the IP address from the output.
 ---
 
 # Task
@@ -155,4 +159,4 @@ admin@ip-172-31-27-155:/$ sha1sum /home/admin/highestip.txt
 6ef426c40652babc0d081d438b9f353709008e93  /home/admin/highestip.txt
 ```
 
-![img.png](../images/img_1.png)
+![img.png](img.png)
