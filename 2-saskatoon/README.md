@@ -31,6 +31,21 @@ Time to Solve: 15 minutes.
 # Solution
 
 ```bash
+wc -l /home/admin/access.log
+```
+
+```bash
+cut -d ' ' -f 1
+```
+
+
+```bash
+awk '{print $1}'
+```
+
+
+
+```bash
 tail -f /home/admin/access.log
 
 admin@ip-172-31-27-155:/$ tail -f /home/admin/access.log
