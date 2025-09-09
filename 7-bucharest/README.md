@@ -22,4 +22,4 @@ in pg_hba.conf i deleted reject policies
 host    all             all             all                     reject
 host    all             all             all                     reject
 ```
-![img.png](img.png)
+![img.png](img.png)№
