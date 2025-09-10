@@ -1,4 +1,7 @@
-
+Briefly:
+/var/www dir must have execute permissions for others
+index.html must have read permissions for others
+---
 # Task
 Description: There's a web server running on this host but curl localhost returns the default 404 Not Found page.
 
@@ -60,17 +63,7 @@ lrwxrwxrwx 1 root     root       33 Jul 21 13:59 index.html -> /opt/site-content
 -rw-r--r-- 1 root     root      612 Jul 21 13:59 index.nginx-debian.html
 admin@ip-10-1-13-59:/$ 
 ```
-```bash
-admin@ip-10-1-13-59:/$ ls -la /opt/site-content/real_index.html
--rw-r----- 1 root root 34 Jul 21 13:59 /opt/site-content/real_index.html
-admin@ip-10-1-13-59:/$ 
-```
 
-```bash
-admin@ip-10-1-13-48:~$ sudo !!
-sudo cat /opt/site-content/real_index.html
-<h1>Welcome to the Real Site!</h1>admin@ip-10-1-13-48:~$ 
-```
 
 ```bash
 admin@ip-10-1-13-48:~$ sudo tail /var/log/nginx/error.log
@@ -87,6 +80,39 @@ sudo chmod o+x /var/www
 drwxr-xr-x  3 root root  4096 Jul 21 13:59 /var/www
 ```
 
+Now there is a different error
+```bash
+admin@ip-10-1-13-140:~$ sudo systemctl restart nginx.service 
+admin@ip-10-1-13-140:~$ curl localhost
+<html>
+<head><title>403 Forbidden</title></head>
+<body>
+<center><h1>403 Forbidden</h1></center>
+<hr><center>nginx/1.18.0</center>
+</body>
+</html>
+admin@ip-10-1-13-140:~$ sudo cat /var/log/nginx/error.log 
+2025/07/21 13:59:19 [notice] 1730#1730: using inherited sockets from "6;7;"
+2025/09/10 04:47:15 [crit] 618#618: *1 stat() "/var/www/html/" failed (13: Permission denied), client: 127.0.0.1, server: _, request: "GET / HTTP/1.1", host: "localhost"
+2025/09/10 04:47:15 [crit] 618#618: *1 stat() "/var/www/html/" failed (13: Permission denied), client: 127.0.0.1, server: _, request: "GET / HTTP/1.1", host: "localhost"
+2025/09/10 04:50:44 [error] 718#718: *1 open() "/var/www/html/index.html" failed (13: Permission denied), client: 127.0.0.1, server: _, request: "GET / HTTP/1.1", host: "localhost"
+```
+
+```bash
+admin@ip-10-1-13-59:/$ ls -la /opt/site-content/real_index.html
+-rw-r----- 1 root root 34 Jul 21 13:59 /opt/site-content/real_index.html
+admin@ip-10-1-13-59:/$ 
+```
+
+```bash
+admin@ip-10-1-13-48:~$ sudo !!
+sudo cat /opt/site-content/real_index.html
+<h1>Welcome to the Real Site!</h1>admin@ip-10-1-13-48:~$ 
+```
+```bash
+sudo chmod o+r /opt/site-content/real_index.html
+```
+или
 ```bash
 sudo chown root:www-data /opt/site-content/real_index.html
 ```
