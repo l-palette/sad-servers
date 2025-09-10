@@ -103,4 +103,25 @@ spec:
   clusterIP: 10.43.216.196
   type: LoadBalancer
 ```
-...
+
+It seems like there is an issue with the selector
+```bash
+nodeSelector:
+    disk: ssd
+```
+
+also we can see that system does not have that much space as declared in resourses limits
+```bash
+resources:
+          limits:
+            memory: 2000Mi
+            cpu: 100m
+          requests:
+            cpu: 100m
+            memory: 2000Mi
+```
+I have changed memory to 256Mi and restarted pods 
+```bash
+kubectl apply -f manifest.yml
+```
+![img.png](img.png)
